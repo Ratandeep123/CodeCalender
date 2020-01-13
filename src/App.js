@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import logo from './logo.svg';
+import Ongoing from './components/ongoing';
+import Upcoming from './components/upcoming';
 // import 'pretty-checkbox';
 class CodeCalender extends React.Component {
     constructor() {
@@ -125,22 +127,17 @@ class CodeCalender extends React.Component {
 
                     {this.state.ongoing.map((data, index) => {
 
+
                         let isValid = this.checkPlatform(data.Platform);
                         if (!isValid) {
                             return <></>;
                         }
 
                         return (
-                            <div className="onBox" key={index}>
-                                <button type="button" data-toggle="collapse" data-target={"#" + index} className="btn btn-outline-success button1 "><h6>Name:{data.Name}</h6> </button>
-                                <div id={index} className="collapse">
-                                    <p>Name:{data.Name}</p>
-                                    <p>EndTime:{data.EndTime}</p>
-                                    <p>Platform:{data.Platform}</p>
-                                    {data.challenge_type ? (<p>challenge_type:{data.challenge_type}</p>) : null}
-                                    <p>url:<a target='blank' href={data.url}>{data.url}</a></p>
-                                </div>
-                            </div>
+                            <Ongoing 
+                                index = {index} 
+                                data = {data}
+                            />
                         )
                     })}
 
@@ -155,17 +152,10 @@ class CodeCalender extends React.Component {
                             return <></>
                         }
                         return (
-                            <div className="oneBox" key={index}>
-                                <button type="button" data-toggle="collapse" data-target={"#" + index} className="btn btn-outline-success button2"><h6>Name:{data.Name}</h6></button>
-                                <div id={index++} className=" rd collapse">
-                                    <p>Duration:{data.Duration}</p>
-                                    <p>EndTime:{data.EndTime}</p>
-                                    <p>Name:{data.Name}</p>
-                                    <p>Platform:{data.Platform}</p>
-                                    <p>StartTime:{data.StartTime}</p>
-                                    <p>url:{data.url}</p>
-                                </div>
-                            </div>
+                           <Ongoing 
+                            index={index+999}
+                            data={data}
+                           />
                         )
                     })}
                 </div>
